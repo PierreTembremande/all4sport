@@ -14,6 +14,7 @@
                 <!-- <th>photo</th> -->
                 <th>Categorie</th>
                 <th>Marque</th>
+                <th>emplacements</th>
             </tr>
         </thead>
 
@@ -28,6 +29,7 @@
                         echo "<td>".$produit['categorie']."</td>";
                         echo "<td>".$produit['marque']."</td>";
                     }
+
                 ?>
         </tbody>
         
