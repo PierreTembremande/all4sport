@@ -1,5 +1,6 @@
 <?php
     include "../View/header.php"
+
 ?>
 
 <h1>Entrepots</h1>

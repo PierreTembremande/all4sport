@@ -31,21 +31,38 @@ Class Bdd{
 
     function getProduits(){
 
-        $sql="SELECT reference_produit AS reference, nom_produit AS nom, prix_ht_produit AS prixht, description_produit AS description, categories.nom_categorie AS categorie, marques.nom_marque AS marque FROM produits JOIN categories ON fk_categorie_produit= id_categories JOIN marques ON fk_marque_produit = id_marques JOIN stocks ON  ;";
+        $sql="SELECT id_produit AS reference, nom_produit AS nom, prix_ht_produit AS prixht,
+         description_produit AS description, 
+         categories.nom_categorie AS categorie, marques.nom_marque AS marque ,
+         stocks.*
+         FROM produits 
+         JOIN categories ON fk_categorie_produit= id_categories 
+         JOIN marques ON fk_marque_produit = id_marques
+         JOIN stocks  on fk_produit = id_produit ;";
         $rq=  $this->bdd->prepare($sql);
         $rq->execute();
         return $rq->fetchAll();
-        $emplacementProduit= $rq['reference'];
-        
-        $seql="SELECT fk_produit, fk_etagere, fk_section, fk_rangee, fk_module, fk_entrepot FROM stocks WHERE fk_produits= :reference;";
-        $req=  $this->bdd->prepare($seql);
-        $req->execute(['fk_produit'=> $emplacementProduit]);
-        return $req->fetchAll();
+
     }
+
+
+   
 
     function getstock($ref){
 
-        $sql ="SELECT quantite_stock, fk_produit FROM stocks WHERE fk_produit = :ref ORDER BY fk_produit DESC";
+        $sql ="SELECT concat(substr(nom_fournisseur,1,3),substr(nom_categorie,1,3), id_produit) as reference,
+			nom_produit AS produit, 
+            nom_entrepot as entrepot, 
+            quantite_stock AS quantite_dans_entrepot, 
+            (SUM(quantite_stock)) AS quantite_totale_produit,
+            count(*)
+            FROM stocks 
+            JOIN produits on fk_produit= id_produit 
+            JOIN entrepots on fk_entrepot = id_entrepot 
+            JOIN fournisseurs on fk_fournisseur_produit = id_fournisseurs
+			jOIN categories on fk_categorie_produit = id_categories
+            group by  fk_produit, fk_entrepot
+            ORDER BY produit; ";
         $rq = $this -> bdd -> prepare($sql);
         $rq -> execute( [":ref" => $ref]);
         return $rq->fetchAll();
