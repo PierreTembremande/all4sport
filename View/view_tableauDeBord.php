@@ -17,8 +17,8 @@
                 <th>Reference</th>
                 <th>Nom produit</th>
                 <th>Havre</th>
-                <th>Lyon</th>
                 <th>Marseille</th>
+                <th>Lyon</th>
                 <th>Stock total</th>
         </thead>
 
@@ -29,11 +29,12 @@
                         echo "<tr>";
                         echo "<td>".$stock['reference']."</td>";
                         echo "<td>".$stock['produit']."</td>";
-                        echo "<td>".$stock['entrepot']."</td>";
-                        echo "<td>".$stock['quantite_dans_entrepot']."</td>";
-                        echo "<td></td>";
+                        echo "<td>".$stock['quantite_stock']."</td>";
+                        echo "<td>40</td>";
+                        echo "<td>59</td>";
                         echo "<td>".$stock['quantite_totale_produit']."</td>";
                         echo "</tr>";
+
 
                     }
 
