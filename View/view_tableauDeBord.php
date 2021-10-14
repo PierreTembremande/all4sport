@@ -7,7 +7,7 @@ include "../View/header.php"
 <form method="GET">
 
     <input type="search" name="search" id="search" placeholder="Rechercher un produit..." />
-    <input type="submit" value="Valider" />
+    <input type="submit" value="Valider" style="outline: solid grey; cursor:pointer;" />
 
 </form>
 

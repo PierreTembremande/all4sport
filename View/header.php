@@ -17,9 +17,9 @@ session_start();
 <body style="text-align:center; background-color: #e8e8e8;">
   <div class="mx-auto">
 
-    <button class="btn btn-secondary" data-bs-toggle="button" autocomplete="off"><a class="link-light" href="controller_entrepots.php">Nos entrepôts</a></button>
-    <button class="btn btn-secondary" data-bs-toggle="button" autocomplete="off"><a class="link-light" href="controller_produits.php">Notre liste de produits</a></button>
-    <button class="btn btn-secondary" data-bs-toggle="button" autocomplete="off"><a class="link-light" href="controller_tableauDeBord.php">Notre tableau de bord</a></button>
+    <a type="button" class="btn btn-secondary" autocomplete="off" class="link-light" href="controller_entrepots.php">Nos entrepôts</a>
+    <a type="button" class="btn btn-secondary" autocomplete="off" class="link-light" href="controller_produits.php">Notre liste de produits</a></button>
+    <a type="button" class="btn btn-secondary" autocomplete="off" class="link-light" href="controller_tableauDeBord.php">Notre tableau de bord</a></button>
 
   </div>
   <br><br>
