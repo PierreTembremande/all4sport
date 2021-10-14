@@ -8,7 +8,7 @@ $bdd= new Bdd();
 if (!empty($_GET["id"])) {
 
     // dans le cas de la requete ajax
-    $entrepot=$bdd->getEntrepot($_GET["id"]);
+    $entrepot=$bdd->getEntrepot($_GET['id']);
     
         $str ="L'entrepôt choisi est  ".$entrepot['nom_entrepot']."<br> 
         Il se trouve au  ".$entrepot['adresse_entrepot']."<br>

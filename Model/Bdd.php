@@ -68,7 +68,7 @@ class Bdd
          WHERE id_produit= :id;";
         $rq =  $this->bdd->prepare($sql);
         $rq->execute([':id'=>$id]);
-        return $rq->fetchAll();
+        return $rq->fetch();
     }
 
 
