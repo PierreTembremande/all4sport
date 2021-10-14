@@ -14,11 +14,12 @@ session_start();
   <title>All4Sport</title>
 </head>
 
-<body>
-  <div>
+<body style="text-align:center; background-color: #e8e8e8;">
+  <div class="mx-auto">
 
-    <button><a href="controller_entrepots.php">Nos entrepôts</a></button>
-    <button><a href="controller_produits.php">Notre liste de produits</a></button>
-    <button><a href="controller_tableauDeBord.php">Notre tableau de bord</a></button>
+    <button class="btn btn-secondary" data-bs-toggle="button" autocomplete="off"><a class="link-light" href="controller_entrepots.php">Nos entrepôts</a></button>
+    <button class="btn btn-secondary" data-bs-toggle="button" autocomplete="off"><a class="link-light" href="controller_produits.php">Notre liste de produits</a></button>
+    <button class="btn btn-secondary" data-bs-toggle="button" autocomplete="off"><a class="link-light" href="controller_tableauDeBord.php">Notre tableau de bord</a></button>
 
   </div>
+  <br><br>

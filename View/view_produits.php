@@ -2,9 +2,9 @@
 include "../View/header.php"
 ?>
 
-<h1>Produits</h1>
+<h1 style="text-align:center;">Produits</h1>
 
-<table class="table table-striped">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>Reference</th>
@@ -20,8 +20,8 @@ include "../View/header.php"
             echo "<tr>";
             echo "<td>" . $produit["reference"] . "</td>";
             echo "<td>" . $produit['nom'] . "...</td>";
-            echo "<td>" . $produit['fk_module'] . ".". $produit['fk_rangee'] . ".". $produit['fk_section'] . ".". $produit['fk_etagere'] . "</td>";
-            echo '<td><button data-bs-toggle="modal" class="btn btn-primary" data-bs-target="#produit" onclick= "detail(\''.substr($produit['id'],-11).'\')" >Détail</button></td>';
+            echo "<td>" . $produit['fk_module'] . "." . $produit['fk_rangee'] . "." . $produit['fk_section'] . "." . $produit['fk_etagere'] . "</td>";
+            echo '<td><button data-bs-toggle="modal" class="btn btn-primary" data-bs-target="#produit" onclick= "detail(\'' . substr($produit['id'], -11) . '\')" >Détail</button></td>';
             echo "</tr>";
         }
 
@@ -33,7 +33,9 @@ include "../View/header.php"
 <script>
     function detail(element) {
 
-        $.get("controller_produits.php", {id: element}, function(data) {
+        $.get("controller_produits.php", {
+            id: element
+        }, function(data) {
             $("#body").html(data);
         });
 

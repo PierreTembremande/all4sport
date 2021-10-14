@@ -31,6 +31,15 @@ class Bdd
         return $res;
     }
 
+    function getNomsEntrepots(){
+
+        $sql = "SELECT nom_entrepot FROM entrepots;";
+        $rq = $this->bdd->prepare($sql);
+        $rq->execute();
+        return $rq->fetchAll();
+        
+    }
+
     function getProduits()
     {
 
