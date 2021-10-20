@@ -10,10 +10,9 @@ if (!empty($_GET["id"])) {
     // dans le cas de la requete ajax
     $entrepot=$bdd->getEntrepot($_GET['id']);
 
-    $str = "L'entrepôt choisi est  " . $entrepot['nom_entrepot'] . ".<br> 
+    echo"L'entrepôt choisi est  " . $entrepot['nom_entrepot'] . ".<br> 
         Il se trouve au  " . $entrepot['adresse_entrepot'] . ".<br>
         Vous pouvez le contacter au: " . $entrepot['telephone_entrepot'];
-    echo $str;
 
 
 } else {

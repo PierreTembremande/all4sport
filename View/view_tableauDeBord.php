@@ -26,17 +26,26 @@ include "../View/header.php"
 
     <tbody>
         <?php
-        foreach ($stocks as $stock) {
+        
+            foreach ($stocks as $stock) {
+
+                echo "<tr>";
+                echo "<td>" . $stock['reference'] . "</td>";
+                echo "<td>" . $stock['produit'] . "</td>";
+
+                echo "<td>40</td>";
+                echo "<td>59</td>";
+                echo "<td>" . $stock['quantite_totale_produit'] . "</td>";
+                echo "</tr>";
+            }
+            
+            foreach ($havre as $stockHavre) {
 
             echo "<tr>";
-            echo "<td>" . $stock['reference'] . "</td>";
-            echo "<td>" . $stock['produit'] . "</td>";
-            echo "<td>" . $stock['quantite_stock'] . "</td>";
-            echo "<td>40</td>";
-            echo "<td>59</td>";
-            echo "<td>" . $stock['quantite_totale_produit'] . "</td>";
+            echo "<td>" . $stockHavre['0'] . "</td>";
             echo "</tr>";
-        }
+            }
+
 
         ?>
     </tbody>
