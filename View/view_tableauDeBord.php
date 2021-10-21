@@ -17,8 +17,11 @@ include "../View/header.php"
             <th>Reference</th>
             <th>Nom produit</th>
             <?php
+            $recup = array();
             foreach ($entrepots as $entrepot) {
                 echo "<th>" . $entrepot['nom_entrepot'] . "</th>";
+                $nom = $entrepot['nom_entrepot'];
+                array_push($recup,$nom);
             }
             ?>
             <th>Stock total</th>
@@ -26,26 +29,25 @@ include "../View/header.php"
 
     <tbody>
         <?php
-        
-            foreach ($stocks as $stock) {
-
-                echo "<tr>";
-                echo "<td>" . $stock['reference'] . "</td>";
-                echo "<td>" . $stock['produit'] . "</td>";
-
-                echo "<td>40</td>";
-                echo "<td>59</td>";
-                echo "<td>" . $stock['quantite_totale_produit'] . "</td>";
-                echo "</tr>";
-            }
+        foreach ($produits as $stock) {
             
-            foreach ($havre as $stockHavre) {
-
             echo "<tr>";
-            echo "<td>" . $stockHavre['0'] . "</td>";
-            echo "</tr>";
-            }
+            echo "<td>" . $stock['reference'] . "</td>";
+            echo "<td>" . $stock['nom'] . "</td>";
 
+            $total = 0;
+            for ($i =0; $i < count($recup); $i++) {
+               
+                if (isset ($stockE[$recup[$i]][$stock['reference']][0])) {
+                    echo "<td>" . $stockE[$recup[$i]][$stock['reference']][0] . "</td>";
+                    $total+= $stockE[$recup[$i]][$stock['reference']][0];
+                } else {
+                    echo '<td>0</td>';
+                }
+            }
+            echo "<td>" . $total . "</td>";
+            echo "</tr>";
+        }
 
         ?>
     </tbody>

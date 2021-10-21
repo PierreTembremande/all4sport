@@ -61,6 +61,33 @@ class Bdd
         return $rq->fetchAll();
     }
 
+    function getProduitsRef($search)
+    {
+
+        $sql = "SELECT concat(substr(nom_fournisseur,1,3),substr(nom_categorie,1,3), id_produit) as reference, 
+         nom_produit AS nom
+         FROM produits 
+         JOIN categories ON fk_categorie_produit= id_categories 
+         JOIN fournisseurs on fk_fournisseur_produit = id_fournisseurs
+         WHERE concat(substr(nom_fournisseur,1,3),substr(nom_categorie,1,3), id_produit) = :ref;";
+        $rq =  $this->bdd->prepare($sql);
+        $rq->execute(['ref'=>$search]);
+        return $rq->fetchAll();
+    }
+
+    function getProduitsALLRef()
+    {
+
+        $sql = "SELECT concat(substr(nom_fournisseur,1,3),substr(nom_categorie,1,3), id_produit) as reference, 
+         nom_produit AS nom
+         FROM produits 
+         JOIN categories ON fk_categorie_produit= id_categories 
+         JOIN fournisseurs on fk_fournisseur_produit = id_fournisseurs;";
+        $rq =  $this->bdd->prepare($sql);
+        $rq->execute();
+        return $rq->fetchAll();
+    }
+
     function getOneProduit($id)
     {
         $sql = "SELECT concat(substr(nom_fournisseur,1,3),substr(nom_categorie,1,3), id_produit) as reference, 
@@ -82,38 +109,20 @@ class Bdd
     }
 
 
-
-
-    function getstock($ref)
+    function getStockUnEntrepot($nomEntrepot)
     {
 
-        $sql = "SELECT concat(substr(nom_fournisseur,1,3),substr(nom_categorie,1,3), id_produit) as reference,
-        	nom_produit AS produit,  
-            (SUM(quantite_stock)) AS quantite_totale_produit
-            FROM stocks 
-            JOIN produits on fk_produit= id_produit 
-            JOIN fournisseurs on fk_fournisseur_produit = id_fournisseurs
-        	JOIN categories on fk_categorie_produit = id_categories
-        	JOIN entrepots on fk_entrepot= id_entrepot
-        	group by  reference;";
-        $rq = $this->bdd->prepare($sql);
-        $rq->execute([":ref" => $ref]);
-        return $rq->fetchAll();
-    }
-
-    function getstockHavre()
-    {
-
-        $sql = "SELECT concat(substr(nom_fournisseur,1,3),substr(nom_categorie,1,3), id_produit) as reference,
-            quantite_stock
-            FROM stocks 
-            JOIN produits on fk_produit= id_produit 
-            JOIN fournisseurs on fk_fournisseur_produit = id_fournisseurs
-		 	JOIN categories on fk_categorie_produit = id_categories
-		 	WHERE fk_entrepot =1
-		 	group by  reference;";
-        $rq = $this->bdd->prepare($sql);
-        $rq->execute();
-        return $rq->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_GROUP);;
+        $sql = "SELECT concat(substr(nom_fournisseur,1,3),substr(nom_categorie,1,3), fk_produit) as reference1, SUM(quantite_stock) as qte_totale_du_produit 
+         
+                 FROM stocks s
+                 left join entrepots e on e.id_entrepot = s.fk_entrepot
+                  JOIN produits on fk_produit= id_produit 
+                  JOIN fournisseurs on fk_fournisseur_produit = id_fournisseurs
+                    JOIN categories on fk_categorie_produit = id_categories
+                     WHERE  e.nom_entrepot = :nomEntrepot
+                 GROUP BY fk_produit";
+        $re = $this->bdd->prepare($sql);
+        $re->execute([":nomEntrepot" => $nomEntrepot]);
+        return $re->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_GROUP);
     }
 }
