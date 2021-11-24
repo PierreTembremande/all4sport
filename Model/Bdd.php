@@ -112,8 +112,8 @@ class Bdd
     function getStockUnEntrepot($nomEntrepot)
     {
 
-        $sql = "SELECT concat(substr(nom_fournisseur,1,3),substr(nom_categorie,1,3), fk_produit) as reference1, SUM(quantite_stock) as qte_totale_du_produit 
-         
+        $sql = "SELECT concat(substr(nom_fournisseur,1,3),substr(nom_categorie,1,3), fk_produit) as reference1, 
+                       SUM(quantite_stock) as qte_totale_du_produit 
                  FROM stocks s
                  left join entrepots e on e.id_entrepot = s.fk_entrepot
                   JOIN produits on fk_produit= id_produit 
@@ -125,4 +125,18 @@ class Bdd
         $re->execute([":nomEntrepot" => $nomEntrepot]);
         return $re->fetchAll(PDO::FETCH_COLUMN | PDO::FETCH_GROUP);
     }
+
+    function getQuantite($nomEntrepot)
+    {
+
+        $sql = "SELECT quantite_originale
+                 FROM stocks s
+                 left join entrepots e on e.id_entrepot = s.fk_entrepot
+                     WHERE  e.nom_entrepot = :nomEntrepot";
+        $re = $this->bdd->prepare($sql);
+        $re->execute([":nomEntrepot" => $nomEntrepot]);
+        return $re->fetchAll();
+    }
 }
+
+
