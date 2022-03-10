@@ -17,17 +17,6 @@ $stockE = array();
 foreach ($entrepots as $e) {
 
     $stockE[$e['nom_entrepot']] = $bdd->getStockUnEntrepot($e['nom_entrepot']);
-
-    if($stockE[$e['nom_entrepot']]<=$bdd->getQuantite($e['nom_entrepot'])*(10/100)){
-
-
-    }elseif($stockE[$e['nom_entrepot']]==0){
-
-        // 
-
-    }else{
-        
-    }
    
 }
 

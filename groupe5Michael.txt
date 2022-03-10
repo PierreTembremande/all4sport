@@ -1,0 +1,31 @@
+6 Go de RAM
+250 Go maximum
+125 Go min
+
+Les connexions simultanées sont possibles.
+places réserver possible.
+
+limitation de SQL possible.
+
+Aspect utilisateur gérable.
+
+firewall ferme les ports. 
+VLAN pour isoler.
+
+Sécurité sur les ports. 
+Validations de l'adresse Mac => Protége du MIM.
+Chiffrement des données en AES.
+
+Droit utilisateur possible.
+politique de sécurité avec les utilisateurs.
+
+RAID impossible.
+Docker peu confidentiel?? 
+pas responsabilité si problème.
+
+RAID O et RAID 1 possible.
+
+Serveur/routeur/pc.
+Sécurité sur le port physique.(vont se renseigner).
+
+Nous informes sur les avancements.

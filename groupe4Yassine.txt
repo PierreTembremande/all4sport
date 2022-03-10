@@ -1,0 +1,27 @@
+1To
+VAM logiciel de sauvegarde.
+2 serveur. Permet que si un server tombe le second prend la reléve. 
+
+pour SQL sur serveur appart.
+Peut limiter le nombre de requête par seconde sur le serveur.
+
+Vlan extérieur.
+28 Go RAM.
+Gestion des adresses possible
+système d'identification possible.
+
+Sauvegard possible.
+
+DDOS mis en place.
+Parfeux et VLAN contre vers.
+Chiffrement des interactions.
+(Sha 3 ???).
+
+gestion des comptes et des droits utilisateurs.
+
+compte audit.
+changement des mots entre les audits.
+
+port peut pas être bloqué en fonction de l'appareil.
+(hors compétence?)
+

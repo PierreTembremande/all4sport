@@ -137,6 +137,18 @@ class Bdd
         $re->execute([":nomEntrepot" => $nomEntrepot]);
         return $re->fetchAll();
     }
+
+    function getVerifLogin($email, $mdp){
+
+        $sql= "SELECT role_libelle
+                FROM users
+                JOIN roles ON idroles= fk_role
+                WHERE email_user=:email and password_user=:mdp";
+        $re = $this->bdd->prepare($sql);
+        $re->execute([":email" => $email, ":mdp"=>$mdp]);
+        return $re->fetch();
+
+    }
 }
 
 
