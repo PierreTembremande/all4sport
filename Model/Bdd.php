@@ -149,6 +149,31 @@ class Bdd
         return $re->fetch();
 
     }
+
+    function getProduitsStocke(){
+
+        $sql = "SELECT nom_produit AS nom,
+                        quantite_stock
+                FROM stocks 
+                JOIN produits ON fk_produit = id_produit
+                Where quantite_stock >=1;";
+        $rq =  $this->bdd->prepare($sql);
+        $rq->execute();
+        return $rq->fetchAll();
+    }
+
+    function getProduitsNonStocke()
+    {
+
+        $sql = "SELECT nom_produit AS nom,
+                        quantite_stock
+                FROM stocks 
+                JOIN produits ON fk_produit = id_produit
+                Where quantite_stock =0;";
+        $rq =  $this->bdd->prepare($sql);
+        $rq->execute();
+        return $rq->fetchAll();
+    }
 }
 
 
