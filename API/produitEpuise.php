@@ -12,4 +12,9 @@ $bdd = new Bdd();
             echo $jsondata;
 
         }
-?>
+
+    if($recuProduit== null ){
+
+        echo "Aucun produit est  épuisé ";
+
+    }

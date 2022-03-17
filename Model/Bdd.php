@@ -162,17 +162,36 @@ class Bdd
         return $rq->fetchAll();
     }
 
-    function getProduitsNonStocke()
-    {
+    function getProduitsNonStocke(){
 
         $sql = "SELECT nom_produit AS nom,
                         quantite_stock
                 FROM stocks 
                 JOIN produits ON fk_produit = id_produit
-                Where quantite_stock =0;";
+                Where quantite_stock is null;";
         $rq =  $this->bdd->prepare($sql);
         $rq->execute();
         return $rq->fetchAll();
+    }
+
+    function recupQuantite($referenceProduit, $entrepot){
+
+        $sql = "SELECT quantite_stock
+                FROM stocks 
+                WHERE fk_produit = :referenceProduit and fk_entrepot = :entrepot ;";
+        $rq =  $this->bdd->prepare($sql);
+        $rq->execute([":referenceProduit" => $referenceProduit, ":entrepot" => $entrepot]);
+        return $rq->fetch();
+    }
+
+    function updateQuantite($referenceProduit, $entrepot, $quantite){
+
+        $sql = "UPDATE stocks 
+                SET quantite_stock = :quantite
+                WHERE fk_produit = :referenceProduit and fk_entrepot = :entrepot ;";
+        $re = $this->bdd->prepare($sql);
+        $re->execute([":referenceProduit" => $referenceProduit, ":entrepot" => $entrepot, ":quantite"=> $quantite]);
+        return $re->fetch();
     }
 }
 
