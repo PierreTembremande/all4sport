@@ -174,23 +174,33 @@ class Bdd
         return $rq->fetchAll();
     }
 
-    function recupQuantite($referenceProduit, $entrepot){
+    function recupQuantite($referenceProduit, $entrepot, $module, $etagere, $section, $range){
 
         $sql = "SELECT quantite_stock
                 FROM stocks 
-                WHERE fk_produit = :referenceProduit and fk_entrepot = :entrepot ;";
+                WHERE fk_produit = :referenceProduit 
+                      and fk_entrepot = :entrepot
+                      and fk_module= :module
+                      and fk_etagere= :etagere
+                      and fk_section= :section
+                      and fk_range= :range ;";
         $rq =  $this->bdd->prepare($sql);
-        $rq->execute([":referenceProduit" => $referenceProduit, ":entrepot" => $entrepot]);
+        $rq->execute([":referenceProduit" => $referenceProduit, ":entrepot" => $entrepot, ":module" => $module, ":etagere" => $etagere, ":section"=>$section, ":range"=>$range]);
         return $rq->fetch();
     }
 
-    function updateQuantite($referenceProduit, $entrepot, $quantite){
+    function updateQuantite($referenceProduit, $entrepot, $module, $etagere, $section, $range, $quantite){
 
         $sql = "UPDATE stocks 
                 SET quantite_stock = :quantite
-                WHERE fk_produit = :referenceProduit and fk_entrepot = :entrepot ;";
+                WHERE fk_produit = :referenceProduit 
+                      and fk_entrepot = :entrepot
+                      and fk_module= :module
+                      and fk_etagere= :etagere
+                      and fk_section= :section
+                      and fk_range= :range ;";
         $re = $this->bdd->prepare($sql);
-        $re->execute([":referenceProduit" => $referenceProduit, ":entrepot" => $entrepot, ":quantite"=> $quantite]);
+        $re->execute([":referenceProduit" => $referenceProduit, ":entrepot" => $entrepot, ":module" => $module, ":etagere" => $etagere, ":section"=>$section, ":range"=>$range, ":quantite"=> $quantite]);
         return $re->fetch();
     }
 }
