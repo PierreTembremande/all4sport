@@ -165,31 +165,30 @@ class Bdd
     function getProduitsNonStocke(){
 
         $sql = "SELECT nom_produit AS nom,
-                        quantite_stock
                 FROM stocks 
                 JOIN produits ON fk_produit = id_produit
-                Where quantite_stock is null;";
+                Where quantite_stock = 0 ;";
         $rq =  $this->bdd->prepare($sql);
         $rq->execute();
         return $rq->fetchAll();
     }
 
-    function recupQuantite($referenceProduit, $entrepot, $module, $etagere, $section, $range){
+    function recupQuantite($referenceProduit, $entrepot, $module, $etagere, $section, $rangee){
 
-        $sql = "SELECT quantite_stock
+        $sql = "SELECT quantite_stock as quantite
                 FROM stocks 
                 WHERE fk_produit = :referenceProduit 
                       and fk_entrepot = :entrepot
                       and fk_module= :module
                       and fk_etagere= :etagere
                       and fk_section= :section
-                      and fk_range= :range ;";
+                      and fk_rangee= :rangee ;";
         $rq =  $this->bdd->prepare($sql);
-        $rq->execute([":referenceProduit" => $referenceProduit, ":entrepot" => $entrepot, ":module" => $module, ":etagere" => $etagere, ":section"=>$section, ":range"=>$range]);
-        return $rq->fetch();
+        $rq->execute([":referenceProduit" => $referenceProduit, ":entrepot" => $entrepot, ":module" => $module, ":etagere" => $etagere, ":section"=>$section, ":rangee"=>$rangee]);
+        return $rq->fetchAll();
     }
 
-    function updateQuantite($referenceProduit, $entrepot, $module, $etagere, $section, $range, $quantite){
+    function updateQuantite($referenceProduit, $entrepot, $module, $etagere, $section, $rangee, $quantite){
 
         $sql = "UPDATE stocks 
                 SET quantite_stock = :quantite
@@ -198,9 +197,9 @@ class Bdd
                       and fk_module= :module
                       and fk_etagere= :etagere
                       and fk_section= :section
-                      and fk_range= :range ;";
+                      and fk_rangee= :rangee;";
         $re = $this->bdd->prepare($sql);
-        $re->execute([":referenceProduit" => $referenceProduit, ":entrepot" => $entrepot, ":module" => $module, ":etagere" => $etagere, ":section"=>$section, ":range"=>$range, ":quantite"=> $quantite]);
+        $re->execute([":referenceProduit" => $referenceProduit, ":entrepot" => $entrepot, ":module" => $module, ":etagere" => $etagere, ":section"=>$section, ":rangee"=>$rangee, ":quantite"=> $quantite]);
         return $re->fetch();
     }
 }

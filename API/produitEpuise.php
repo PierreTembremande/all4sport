@@ -8,8 +8,7 @@ $bdd = new Bdd();
 
         foreach($recuProduit as $produit){
 
-            $jsondata="{\"nom\":\"". $produit['nom']."\",\"quantite\":\"".$produit['quantite_stock']."\"}";
-            echo $jsondata;
+            echo json_encode($recuProduit);;
 
         }
 
