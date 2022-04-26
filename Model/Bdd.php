@@ -150,26 +150,35 @@ class Bdd
 
     }
 
-    function getProduitsStocke(){
+    function getProduitsStocke($localisation){
 
         $sql = "SELECT nom_produit AS nom,
                         quantite_stock
                 FROM stocks 
                 JOIN produits ON fk_produit = id_produit
-                Where quantite_stock >=1;";
+                JOIN entrepots ON fk_entrepot = id_entrepot
+                WHERE quantite_stock >=1
+                -- AND nom_entrepot= :localisation
+                ;"; 
         $rq =  $this->bdd->prepare($sql);
         $rq->execute();
+        // ["localisation" => $localisation]
         return $rq->fetchAll();
     }
 
-    function getProduitsNonStocke(){
+    function getProduitsNonStocke($localisation){
 
-        $sql = "SELECT nom_produit AS nom,
+        $sql = "SELECT nom_produit AS nom
                 FROM stocks 
                 JOIN produits ON fk_produit = id_produit
-                Where quantite_stock = 0 ;";
+                JOIN entrepots ON fk_entrepot = id_entrepot
+                WHERE quantite_stock = 0
+                -- AND nom_entrepot= :localisation
+                ;"
+                ;
         $rq =  $this->bdd->prepare($sql);
         $rq->execute();
+        // ([":localisation"=>$localisation]
         return $rq->fetchAll();
     }
 

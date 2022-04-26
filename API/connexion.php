@@ -4,7 +4,7 @@ $email=$_GET['email'];
 str_replace("%40","@",$email);
 $mdp= $_GET['mdp'];
 
-require_once "../Model/Bdd.php";
+require_once "../Model/Bdd.php"; 
 
 $bdd = new Bdd();
 

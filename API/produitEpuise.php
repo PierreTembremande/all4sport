@@ -1,10 +1,12 @@
 <?php
 
+$localisation= $_GET['localisation'];
+
 require_once "../Model/Bdd.php";
 
 $bdd = new Bdd();
 
-    $recuProduit= $bdd->getProduitsNonStocke();
+    $recuProduit= $bdd->getProduitsNonStocke($localisation);
 
         foreach($recuProduit as $produit){
 
@@ -14,6 +16,6 @@ $bdd = new Bdd();
 
     if($recuProduit== null ){
 
-        echo "Aucun produit est  épuisé ";
+        echo json_encode("Aucun produit est  épuisé ");
 
     }
